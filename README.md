@@ -8,7 +8,7 @@
  * @param {Array} tasks - 要执行的任务数组（promises）。
  * @param {number} limit - 同时执行的最大任务数。
  */
-const concurrency = new Concurrency(array, limit);
+const concurrency = new Concurrency(tasks, limit);
 ```
 
 ## 调用方法
