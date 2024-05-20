@@ -22,7 +22,7 @@ class Concurrency {
   }
 
   #next(rqs) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       rqs.forEach((r) => {
         r().then((res) => {
           const API = res.url.split('/').pop();
@@ -37,7 +37,7 @@ class Concurrency {
             result: res,
             status: err.status,
           };
-          reject(this.#responses);
+          resolve(this.#responses);
         });
       });
     });
