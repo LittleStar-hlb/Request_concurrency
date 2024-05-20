@@ -43,8 +43,3 @@ class Concurrency {
     });
   }
 }
-
-const con = new Concurrency(reqList, 3);
-con.execute().then((res) => {
-  console.log(res);
-});
