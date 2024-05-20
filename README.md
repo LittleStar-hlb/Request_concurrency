@@ -5,7 +5,7 @@
 ```javascript
 /**
  * @constructor
- * @param {Array} tasks - 要执行的任务数组（promises）。
+ * @param {Array<Function>} tasks - 要执行的任务数组，每个任务都返回一个 Promise。
  * @param {number} limit - 同时执行的最大任务数。
  */
 const concurrency = new Concurrency(tasks, limit);
