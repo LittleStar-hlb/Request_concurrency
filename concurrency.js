@@ -34,7 +34,7 @@ class Concurrency {
         }).catch((err) => {
           const API = err.url.split('/').pop();
           this.#responses[`/${API}`] = {
-            result: res,
+            result: err,
             status: err.status,
           };
           resolve(this.#responses);
