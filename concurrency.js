@@ -22,8 +22,8 @@ class Concurrency {
   }
 
   async #next(rqs) {
-    const results = await Promise.allSettled(rqs.map((r) => r()));
-    results.forEach((res) => {
+    const allResult = await Promise.allSettled(rqs.map((r) => r()));
+    allResult.forEach((res) => {
       const API = res.value.url.split('/').pop();
       this.#responses[`/${API}`] = {
         result: res,
