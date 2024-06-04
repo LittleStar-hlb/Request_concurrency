@@ -22,9 +22,9 @@ const concurrency = new Concurrency(tasks, limit);
 concurrency
   .execute()
   .then(() => {
-    // 处理成功完成
+    // 处理成功结果
   })
   .catch(() => {
-    // 处理错误
+    // 处理错误结果
   });
 ```

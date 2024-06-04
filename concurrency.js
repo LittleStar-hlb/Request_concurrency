@@ -3,7 +3,7 @@ class Concurrency {
   #requests;
   #limit;
 
-  constructor(requests, limit) {
+  constructor(requests = [], limit = 5) {
     this.#responses = {};
     this.#requests = requests;
     this.#limit = limit;
