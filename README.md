@@ -19,12 +19,7 @@ const concurrency = new Concurrency(tasks, limit);
  * @description 并发执行任务并返回一个 Promise。
  * @returns {Promise} 当所有任务完成时解析的 Promise。
  */
-concurrency
-  .execute()
-  .then(() => {
-    // 处理成功结果
-  })
-  .catch(() => {
-    // 处理错误结果
-  });
+concurrency.execute().then((res) => {
+  // 处理结果
+});
 ```
