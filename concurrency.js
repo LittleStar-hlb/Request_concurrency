@@ -21,25 +21,14 @@ class Concurrency {
     return this.#responses;
   }
 
-  #next(rqs) {
-    return new Promise((resolve) => {
-      rqs.forEach((r) => {
-        r().then((res) => {
-          const API = res.url.split('/').pop();
-          this.#responses[`/${API}`] = {
-            result: res,
-            status: res.status,
-          };
-          resolve(this.#responses);
-        }).catch((err) => {
-          const API = err.url.split('/').pop();
-          this.#responses[`/${API}`] = {
-            result: err,
-            status: err.status,
-          };
-          resolve(this.#responses);
-        });
-      });
+  async #next(rqs) {
+    const results = await Promise.allSettled(rqs.map((r) => r()));
+    results.forEach((res) => {
+      const API = res.value.url.split('/').pop();
+      this.#responses[`/${API}`] = {
+        result: res,
+        status: res.status,
+      };
     });
   }
 }
