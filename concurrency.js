@@ -3,13 +3,15 @@ class Concurrency {
   #requests;
   #limit;
 
-  constructor(requests = [], limit = 5) {
+  constructor(limit = 5) {
     this.#responses = {};
-    this.#requests = requests;
+    this.#requests = [];
     this.#limit = limit;
   }
 
-  async execute() {
+  async all(requests) {
+    this.#requests = requests;
+
     while (this.#requests.length > 0) {
       if (this.#requests.length < this.#limit) {
         await this.#next(this.#requests.splice(0, this.#requests.length));
@@ -21,12 +23,12 @@ class Concurrency {
     return this.#responses;
   }
 
-  async #next(rqs) {
-    const allResult = await Promise.allSettled(rqs.map((r) => r()));
+  async #next(requests) {
+    const allResult = await Promise.allSettled(requests);
     allResult.forEach((res) => {
       const API = res.value.url.split('/').pop();
       this.#responses[`/${API}`] = {
-        result: res,
+        value: res.value,
         status: res.status,
       };
     });
