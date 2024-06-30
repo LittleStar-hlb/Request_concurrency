@@ -1,25 +1,29 @@
 # 并发请求
 
-## 初始化
+## 开始
 
 ```javascript
 /**
  * @constructor
- * @param {Array<Function>} tasks - 要执行的任务数组，每个任务都返回一个 Promise。
  * @param {number} limit - 同时执行的最大任务数。
  */
-const concurrency = new Concurrency(tasks, limit);
+const concurrency = new Concurrency(limit);
 ```
 
 ## 调用方法
 
 ```javascript
 /**
- * @method execute
+ * @method all
  * @description 并发执行任务并返回一个 Promise。
+ * @param {Array<Promise} tasks - 传入一个 Promise 数组。
  * @returns {Promise} 当所有任务完成时解析的 Promise。
  */
-concurrency.execute().then((res) => {
+
+// 1.
+concurrency.all(tasks).then((res) => {
   // 处理结果
 });
+// 2.
+await concurrent.all(tasks);
 ```
